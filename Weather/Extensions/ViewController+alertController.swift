@@ -9,11 +9,12 @@ import Foundation
 import UIKit
 
 extension ViewController {
-    func presentSearchAlertController(withTitle title: String?, message: String?, style: UIAlertController.Style) {
+    func presentSearchAlertController(withTitle title: String?, message: String?, style: UIAlertController.Style,
+                                      completionHandler: @escaping (String)->()) {
         
         let alertController = UIAlertController(title: title, message: message, preferredStyle: style)
         alertController.addTextField { textField in
-            let cities = ["Kyiv", "Warsaw", "New York", "London"]
+            let cities = ["Kyiv", "New York", "London", "Paris"]
             textField.placeholder = cities.randomElement()
         }
         let searchAction = UIAlertAction(title: "Search", style: .default) { action in
@@ -21,7 +22,8 @@ extension ViewController {
             guard let cityName = textField?.text else { return }
             print("textField?.text = \(textField?.text)")
             if !cityName.isEmpty {
-                print("Searching info for City \(cityName)........")
+                let city = cityName.split(separator: " ").joined(separator: "%20")
+                completionHandler(city)
             }
         }
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
