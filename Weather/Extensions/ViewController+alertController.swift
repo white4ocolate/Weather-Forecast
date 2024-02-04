@@ -20,7 +20,6 @@ extension ViewController {
         let searchAction = UIAlertAction(title: "Search", style: .default) { action in
             let textField = alertController.textFields?.first
             guard let cityName = textField?.text else { return }
-            print("textField?.text = \(textField?.text)")
             if !cityName.isEmpty {
                 let city = cityName.split(separator: " ").joined(separator: "%20")
                 completionHandler(city)
