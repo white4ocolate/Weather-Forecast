@@ -13,15 +13,36 @@ struct CurrentWeather {
     
     let temperature: Double
     var temperatureString: String {
-        return "\(temperature.rounded())"
+        return String(format: "%.0f", temperature)
     }
     
     let feelsLikeTemperature: Double
     var feelsLikeTemperatureString: String {
-        return "\(feelsLikeTemperature.rounded())"
+        return String(format: "%.0f", feelsLikeTemperature)
     }
     
     let conditionCode: Int
+    
+    var iconName: String {
+        switch conditionCode {
+        case 200...232: 
+            return "storm"
+        case 300...321:
+            return "drizzle"
+        case 500...531:
+            return "rain"
+        case 600...622:
+            return "snow"
+        case 701...781:
+            return "atmosphere"
+        case 800:
+            return "clear"
+        case 801...804:
+            return "clouds"
+        default:
+            return ""
+        }
+    }
     
     
     init?(currentWeatherData: CurrentWeatherData) {
